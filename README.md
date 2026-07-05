@@ -186,19 +186,6 @@ The trained model was successfully deployed to the ESP32-S3-EYE and evaluated in
 
 ---
 
-# Getting Started
-
-Clone the repository
-
-```bash
-git clone https://github.com/yourusername/facial-emotion-recognition-esp32.git
-```
-
-Open the project in **Arduino IDE** or **ESP-IDF**, add the exported Edge Impulse library, and upload the firmware to the ESP32-S3-EYE.
-
-
----
-
 # References
 
 1. Espressif Systems. *ESP32-S3-EYE Getting Started Guide*  
