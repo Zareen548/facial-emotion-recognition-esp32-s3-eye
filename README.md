@@ -2,59 +2,85 @@
 
 A real-time facial emotion recognition system developed using the **ESP32-S3-EYE** development board and **Edge Impulse**. The system performs on-device emotion classification using a lightweight **MobileNetV1** transfer learning model and recognizes four facial emotions: **Happy, Sad, Surprised, and Neutral**.
 
-The project demonstrates how edge AI can provide low-latency, privacy-preserving emotion recognition for workplace monitoring and human-computer interaction.
+The project demonstrates how edge AI enables low-latency, privacy-preserving emotion recognition by performing inference directly on the embedded device without cloud connectivity.
 
 ---
 
-## Project Overview
+# Project Overview
 
-Emotion recognition has become an important research area in computer vision and artificial intelligence. This project proposes a lightweight edge computing solution capable of recognizing human emotions directly on an ESP32-S3-EYE without relying on cloud processing.
+Facial emotion recognition has become an important application of computer vision and embedded artificial intelligence. This project presents an edge AI solution that captures facial images using the ESP32-S3-EYE camera, classifies emotions locally using a trained MobileNetV1 model, and displays the detected emotion in real time.
 
-The system captures facial images using the onboard camera, processes them locally, and classifies them into one of four emotional states in real time.
-
----
-
-## Objectives
-
-- Develop a real-time facial emotion recognition system.
-- Deploy a lightweight machine learning model on ESP32-S3-EYE.
-- Perform emotion classification directly on the edge device.
-- Reduce latency while preserving user privacy.
-- Demonstrate the applicability of edge AI in workplace environments.
+Unlike cloud-based approaches, all inference is executed directly on the ESP32-S3-EYE, reducing latency and preserving user privacy.
 
 ---
 
 # Features
 
 - Real-time facial emotion recognition
-- Edge AI inference on ESP32-S3-EYE
-- Lightweight MobileNetV1 transfer learning model
-- Four emotion classes:
+- On-device inference using ESP32-S3-EYE
+- MobileNetV1 Transfer Learning model
+- Edge Impulse deployment
+- Four emotion classes
   - 😊 Happy
-  - 😐 Neutral
   - 😢 Sad
   - 😲 Surprised
-- Local image processing without cloud connectivity
-- LCD display output
-- Low-latency inference using Edge Impulse
+  - 😐 Neutral
+- Lightweight edge AI implementation
+- LCD-based real-time output
+
+---
+
+# System Workflow
+
+The complete workflow of the proposed system is shown below.
+
+![Workflow](docs/workflow_diagram.png)
+
+---
+
+# Hardware Platform
+
+The project uses the **ESP32-S3-EYE** development board with an integrated camera and LCD display.
+
+![ESP32-S3-EYE](docs/system_block_diagram.png)
+
+*Source: Espressif Systems.*
+
+---
+
+# Model Development
+
+The emotion recognition model was trained using the **Edge Impulse** platform.
+
+The training pipeline consists of
+
+- Data acquisition
+- Image preprocessing
+- Feature extraction
+- MobileNetV1 transfer learning
+- Model optimization
+- Model export as a C++ library
+
+![Edge Impulse Workflow](docs/impulse_creation.png)
 
 ---
 
 # Hardware
 
-- ESP32-S3-EYE Development Board
+- ESP32-S3-EYE
 - Built-in Camera
 - LCD Display
-- USB Connection
+- USB Interface
 
 ---
 
 # Software & Tools
 
 - Edge Impulse
-- Arduino IDE / ESP-IDF
+- Arduino IDE
+- ESP-IDF
 - C++
-- ESP32 SDK
+- MobileNetV1
 - FER2013 Dataset
 
 ---
@@ -63,38 +89,16 @@ The system captures facial images using the onboard camera, processes them local
 
 The project uses the **FER2013** facial expression dataset.
 
-Dataset details:
+### Dataset Summary
 
-- Total images used: **4925**
-- Emotion classes:
-  - Happy
-  - Sad
-  - Surprised
-  - Neutral
+| Item | Value |
+|------|------:|
+| Total Images | 4925 |
+| Training Images | 3940 |
+| Testing Images | 985 |
+| Emotion Classes | 4 |
 
-Dataset split:
-
-| Dataset | Images |
-|----------|--------:|
-| Training | 3940 |
-| Testing | 985 |
-
----
-
-# Machine Learning Model
-
-The model was trained using the **Edge Impulse** platform.
-
-### Model Configuration
-
-- Transfer Learning
-- MobileNetV1 96×96 0.1
-- Grayscale images
-- Input Layer: 9216
-- Hidden Layer: 16 neurons
-- Output Classes: 4
-
-Detected emotions:
+Recognized emotions:
 
 - Happy
 - Sad
@@ -103,60 +107,33 @@ Detected emotions:
 
 ---
 
-# System Workflow
+# Model Configuration
 
-```text
-Camera
-   │
-   ▼
-Capture Face Image
-   │
-   ▼
-Pre-processing
-   │
-   ├── Face Detection
-   ├── Grayscale Conversion
-   ├── Resize Image
-   ▼
-Edge Impulse Model
-(MobileNetV1)
-   │
-   ▼
-Emotion Classification
-   │
-   ▼
-Display Result on LCD
-```
+| Parameter | Value |
+|-----------|-------|
+| Framework | Edge Impulse |
+| Backbone | MobileNetV1 96×96 0.1 |
+| Input | Grayscale 96×96 |
+| Hidden Layer | 16 Neurons |
+| Output Classes | 4 |
 
 ---
 
 # Methodology
 
-The complete workflow consists of the following stages:
-
-1. Capture facial images using the ESP32-S3-EYE camera.
-2. Collect and prepare the FER2013 dataset.
-3. Train the model using Edge Impulse.
-4. Export the trained model as a C++ library.
-5. Deploy the model on the ESP32-S3-EYE.
-6. Perform real-time emotion recognition.
-7. Display the predicted emotion on the LCD.
+1. Collect the FER2013 facial expression dataset.
+2. Train a MobileNetV1 model using Edge Impulse.
+3. Export the trained model as a C++ library.
+4. Deploy the model to the ESP32-S3-EYE.
+5. Capture facial images using the onboard camera.
+6. Perform on-device inference.
+7. Display the detected emotion on the LCD.
 
 ---
 
-# Results
+# Experimental Results
 
-## Training Performance
-
-- Dataset Accuracy: **60.4%**
-
-## Real-Time Deployment
-
-- Average processing speed: **5 FPS**
-- Camera Resolution: **240 × 240**
-- Real-time deployment accuracy: **approximately 60.4%**
-
-### Performance Comparison
+## Model Performance
 
 | Method | Accuracy |
 |---------|----------:|
@@ -164,74 +141,71 @@ The complete workflow consists of the following stages:
 | Raspberry Pi 4B + Webcam | 43.65% |
 | ESP32-S3-EYE + Built-in Camera | 39.84% |
 
+### Real-Time Performance
+
+- Camera Resolution: **240 × 240**
+- Processing Speed: **≈5 FPS**
+- Real-time emotion recognition on the ESP32-S3-EYE
+
+---
+
+## Confusion Matrix
+
+The confusion matrix obtained after training demonstrates the classification performance for the four emotion classes.
+
+![Confusion Matrix](docs/confusion_matrix.png)
+
+---
+
+## Real-Time Deployment
+
+The trained model was successfully deployed to the ESP32-S3-EYE and evaluated in real-time using live facial expressions.
+
+![Real-Time Deployment](docs/realtime_demo.png)
+
 ---
 
 # Applications
 
 - Workplace well-being monitoring
-- Employee emotion analysis
 - Human-computer interaction
 - Smart office systems
-- Edge AI applications
-- Privacy-preserving AI systems
+- Edge AI
+- IoT-based emotion recognition
 
 ---
 
-# Future Improvements
+# Future Work
 
-- Support additional emotions such as:
-  - Fear
-  - Disgust
-  - Anger
+- Add additional emotions such as Fear, Anger, and Disgust.
 - Improve real-world accuracy using a larger dataset.
-- Train with images captured directly from the ESP32-S3-EYE.
-- Improve robustness under different lighting conditions.
-- Add long-term emotion logging and analytics.
+- Increase robustness under varying lighting conditions.
+- Collect a custom dataset using the ESP32-S3-EYE.
+- Add long-term emotion analytics and logging.
+
 
 ---
 
+# Getting Started
 
-# Installation
-
-1. Clone the repository
+Clone the repository
 
 ```bash
 git clone https://github.com/yourusername/facial-emotion-recognition-esp32.git
 ```
 
-2. Open the project in Arduino IDE or ESP-IDF.
+Open the project in **Arduino IDE** or **ESP-IDF**, add the exported Edge Impulse library, and upload the firmware to the ESP32-S3-EYE.
 
-3. Install the required ESP32 board package.
-
-4. Add the exported Edge Impulse C++ library.
-
-5. Upload the program to the ESP32-S3-EYE.
-
----
-
-# Demonstration
-
-The ESP32-S3-EYE continuously captures facial images, performs local inference using the deployed MobileNetV1 model, and displays one of the following emotions on the LCD:
-
-- Happy
-- Sad
-- Neutral
-- Surprised
-
-The entire inference process is performed on the device without requiring cloud communication.
-
----
-
-# Acknowledgements
-- Edge Impulse
-- Espressif Systems
-- FER2013 Dataset
 
 ---
 
 # References
 
-1. Edge Impulse — https://edgeimpulse.com/
-2. ESP32-S3-EYE Getting Started Guide — https://github.com/espressif/esp-who
-3. FER2013 Dataset — https://www.kaggle.com/datasets/msambare/fer2013
+1. Espressif Systems. *ESP32-S3-EYE Getting Started Guide*  
+   https://github.com/espressif/esp-who
 
+2. Edge Impulse  
+   https://edgeimpulse.com/
+
+3. FER2013 Dataset  
+   https://www.kaggle.com/datasets/msambare/fer2013
