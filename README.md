@@ -42,7 +42,7 @@ The complete workflow of the proposed system is shown below.
 
 The project uses the **ESP32-S3-EYE** development board with an integrated camera and LCD display.
 
-![ESP32-S3-EYE](docs/system_block_diagram.png)
+![ESP32-S3-EYE](docs/System_block_diagram.png)
 
 *Source: Espressif Systems.*
 
